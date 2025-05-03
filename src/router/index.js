@@ -4,7 +4,7 @@ import Vice from '../components/Vice.vue'
 import ActivityHighlights from '../components/ActivityHighlights.vue'
 import Highlights from '../components/Highlights.vue'
 import Cooperate from '../components/Cooperate.vue'
-import Commodity from '../components/Commodity.vue'
+import Commodity from '../components/commodity.vue'
 import Certificate from '../components/Certificate.vue' // 新增有機證書組件
 import NotFound from '../components/NotFound.vue'
 
