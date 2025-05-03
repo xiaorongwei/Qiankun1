@@ -1,0 +1,149 @@
+/* 設定全域變數與基本樣式 */
+
+:root {
+    /* 設定全域字體，依序選擇適合的字體 */
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    /* 設定行高 */
+    font-weight: 400;
+    /* 設定字重 */
+    /* 自動適應淺色或深色模式 */
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    /* 預設文字顏色 (深色模式) */
+    background-color: #242424;
+    /* 預設背景色 (深色模式) */
+    /* 增強字體渲染效果 */
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* 讓字體更平滑（適用於 macOS） */
+    -moz-osx-font-smoothing: grayscale;
+    /* 讓字體更平滑（適用於 macOS） */
+}
+
+
+/* 超連結 (a) 樣式 */
+
+a {
+    font-weight: 500;
+    /* 設定字重為 500 (稍微加粗) */
+    color: #646cff;
+    /* 預設連結顏色 */
+    text-decoration: inherit;
+    /* 繼承原本的文字裝飾 (不加底線) */
+}
+
+
+/* 滑鼠懸停 (hover) 時，改變超連結顏色 */
+
+a:hover {
+    color: #535bf2;
+}
+
+
+/* 全域 body 樣式 */
+
+body {
+    margin: 0;
+    /* 移除預設邊距 */
+    display: flex;
+    /* 使用 flex 讓內容可以置中對齊 */
+    place-items: center;
+    /* 讓內容垂直置中 (適用於 flex) */
+    min-width: 320px;
+    /* 設定最小寬度，確保適用於小螢幕設備 */
+    min-height: 100vh;
+    /* 設定最小高度為視窗高度，確保畫面滿版 */
+}
+
+
+/* 標題 (h1) 樣式 */
+
+h1 {
+    font-size: 3.2em;
+    /* 設定字體大小為 3.2em */
+    line-height: 1.1;
+    /* 設定行高 */
+}
+
+
+/* 按鈕 (button) 樣式 */
+
+button {
+    border-radius: 8px;
+    /* 設定圓角邊框 */
+    border: 1px solid transparent;
+    /* 預設邊框為透明 */
+    padding: 0.6em 1.2em;
+    /* 設定內邊距 */
+    font-size: 1em;
+    /* 設定字體大小 */
+    font-weight: 500;
+    /* 設定字體粗細 */
+    font-family: inherit;
+    /* 使用繼承的字體 */
+    background-color: #1a1a1a;
+    /* 設定按鈕背景色 */
+    cursor: pointer;
+    /* 滑鼠懸停時顯示手指游標 */
+    transition: border-color 0.25s;
+    /* 設定邊框顏色變化的動畫時間 */
+}
+
+
+/* 當滑鼠移動到按鈕時，變更邊框顏色 */
+
+button:hover {
+    border-color: #646cff;
+}
+
+
+/* 當按鈕獲得焦點時，設定明顯的外框 */
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+/* .card 類別，提供間距 */
+
+.card {
+    padding: 2em;
+    /* 設定內邊距 */
+}
+
+
+/* #app 容器的樣式 */
+
+#app {
+    max-width: 1280px;
+    /* 設定最大寬度 */
+    margin: 0 auto;
+    /* 讓內容置中 */
+    padding: 2rem;
+    /* 設定內邊距 */
+    text-align: center;
+    /* 讓內部文字置中 */
+}
+
+
+/* 淺色模式 (當系統設置為淺色時，會覆蓋預設樣式) */
+
+@media (prefers-color-scheme: light) {
+     :root {
+        color: #213547;
+        /* 文字顏色變為深色 */
+        background-color: #ffffff;
+        /* 背景色變為白色 */
+    }
+    /* 當滑鼠移動到超連結時，變更顏色 */
+    a:hover {
+        color: #747bff;
+    }
+    /* 按鈕背景色變淺 */
+    button {
+        background-color: #f9f9f9;
+    }
+}
