@@ -3,7 +3,7 @@ import Home from '../components/Home.vue'
 import vice from '../components/vice.vue'
 import ActivityHighlights from '../components/ActivityHighlights.vue'
 import Highlights from '../components/Highlights.vue'
-import Cooperate from '../components/Cooperate.vue'
+import cooperate from '../components/cooperate.vue'
 import Commodity from '../components/commodity.vue'
 import Certificate from '../components/Certificate.vue' // 新增有機證書組件
 import NotFound from '../components/NotFound.vue'
@@ -35,7 +35,7 @@ const routes = [{
     {
         path: '/cooperate',
         name: 'cooperate',
-        component: Cooperate,
+        component: cooperate,
         meta: { title: '合作夥伴' }
     },
     {
