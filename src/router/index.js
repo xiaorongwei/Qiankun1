@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Home.vue'
-import Vice from '../components/Vice.vue'
+import vice from '../components/vice.vue'
 import ActivityHighlights from '../components/ActivityHighlights.vue'
 import Highlights from '../components/Highlights.vue'
 import Cooperate from '../components/Cooperate.vue'
@@ -15,9 +15,9 @@ const routes = [{
         meta: { title: '首頁' }
     },
     {
-        path: '/about',
-        name: 'about',
-        component: Vice,
+        path: '/vice',
+        name: 'vice',
+        component: vice,
         meta: { title: '關於我們' }
     },
     {

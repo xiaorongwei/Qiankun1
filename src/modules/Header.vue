@@ -25,7 +25,7 @@
                 <div class="dropdown">
                     <span class="navbar-link">🌱關於我們</span>
                     <div class="dropdown-menu">
-                        <router-link to="/about" class="dropdown-item">📖成立主旨</router-link>
+                        <router-link to="/vice" class="dropdown-item">📖成立主旨</router-link>
                         <router-link to="/certificate" class="dropdown-item">
                             📜有機證書
                         </router-link>
