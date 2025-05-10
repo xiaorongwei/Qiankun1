@@ -73,7 +73,7 @@
 .footer {
     width: 100%;
     background-color: #e8f5e9;
-    border-top: 3px solid #26f645;
+    border-top: 3px solid #66bb6a;
     padding: 40px 0;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }

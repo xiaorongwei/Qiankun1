@@ -118,7 +118,7 @@ const router = useRouter()
     width: 100%;
     background-color: #dfffe1;
     padding: 10px 0;
-    border-bottom: 3px solid #26f645;
+    border-bottom: 3px solid #66bb6a;
     box-sizing: border-box;
 }
 
