@@ -1,128 +1,151 @@
-export const farmsData = [
+const farms = [
     {
-        logo: '/farms/farm1.jpg',
-        name: '綠野農場',
-        address: '屏東縣萬巒鄉新厝村新平路73號',
-        telephone: '0937692657',
-        date: '周一到周六',
-        time: '08:00~21:00',
-        description: '專注有機蔬菜種植'
+        id: 1,
+        name: '乾坤有機生態農場',
+        contactPerson: '王乾坤',
+        phone: '0937692657',
+        address: '屏東縣萬巒鄉新厝村6鄰新平路73號',
+        products: ['荔枝', '芭樂'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/ChienKunFarm/'
     },
     {
-        logo: '/farms/farm2.jpg',
-        name: '青青草原農場',
-        address: '苗栗縣大湖鄉東湖村東湖路123號',
-        telephone: '0938123456',
-        date: '週日全天',
-        time: '08:00~18:00',
-        description: '草原上的自然放牧農場'
+        id: 2,
+        name: '尤家有機檸檬園',
+        contactPerson: '翁錦珍',
+        phone: '0956291265',
+        address: '屏東縣里港鄉茄冬村茄冬路7號',
+        products: ['檸檬'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/liganglemon/'
     },
     {
-        logo: '/farms/farm3.jpg',
-        name: '金色麥田農場',
-        address: '新竹縣五峰鄉明德村明德路456號',
-        telephone: '0987234567',
-        date: '週一到週五',
-        time: '10:00~17:00',
-        description: '以小麥種植為主的農場'
+        id: 3,
+        name: '永勝有機園',
+        contactPerson: '吳永勝',
+        phone: '0925769192',
+        address: '屏東縣瑪家鄉三和村美園31號',
+        products: ['木瓜', '蕃茄'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/as443/'
     },
     {
-        logo: '/farms/farm4.jpg',
-        name: '山水風情農場',
-        address: '台中市和平區雙龍路789號',
-        telephone: '0928345678',
-        date: '週末全天',
-        time: '07:00~20:00',
-        description: '結合山水景觀的生態農場'
+        id: 4,
+        name: '蘇蔡農場',
+        contactPerson: '蔡昌殷',
+        phone: '0932733072',
+        address: '高雄市大寮區大發工業區華中路28號',
+        products: ['火龍果'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/sutsaifarm'
     },
     {
-        logo: '/farms/farm5.jpg',
-        name: '蔬果天堂農場',
-        address: '台南市永康區永大路321號',
-        telephone: '0956123456',
-        date: '每日',
-        time: '08:00~18:00',
-        description: '專注有機蔬果栽培的農場'
+        id: 5,
+        name: '屏東農夫金銀花',
+        contactPerson: '黃穎',
+        phone: '0937384919',
+        address: '屏東縣竹田鄉二崙村義和路2-50號',
+        products: ['金銀花及金銀花相關產品'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/552gphxb'
     },
     {
-        logo: '/farms/farm6.jpg',
-        name: '水稻田園農場',
-        address: '桃園市八德區五福路234號',
-        telephone: '0919789456',
-        date: '週一到週六',
-        time: '09:00~17:00',
-        description: '主打稻作栽培的農場'
+        id: 6,
+        name: '巴轆星宿有機農園',
+        contactPerson: '張魯華',
+        phone: '0932883448',
+        address: '屏東市廣興里廣興126-5號',
+        products: ['檸檬', '金桔'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/baruorganicfarm/'
     },
     {
-        logo: '/farms/farm7.jpg',
-        name: '茶香世家農場',
-        address: '南投縣鹿谷鄉茶園路678號',
-        telephone: '0931122334',
-        date: '每日',
-        time: '07:30~19:00',
-        description: '高山茶葉栽培與品茗體驗'
+        id: 7,
+        name: '新興果農讚',
+        contactPerson: '徐振鐘',
+        phone: '0912499603',
+        address: '屏東縣竹田鄉泗洲村洲中路52號',
+        products: ['扁實檸檬', '紅龍果', '酪梨', '番石榴', '山刺番荔枝', '紅毛丹', '山竹'],
+        isOrganic: true,
+        website: 'https://www.i-organic.org.tw/farm/HOAF1169/'
     },
     {
-        logo: '/farms/farm8.jpg',
-        name: '花田喜事農場',
-        address: '彰化縣員林鎮花田路567號',
-        telephone: '0988777665',
-        date: '週一到週五',
-        time: '09:00~16:30',
-        description: '專注於花卉種植與觀光'
+        id: 8,
+        name: '成德寬居農場',
+        contactPerson: '李宗達',
+        phone: '0918092890',
+        address: '屏東縣萬巒鄉信敏路207號',
+        products: ['澳洲茶樹', '洛神'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/people/成德寬居有機農場/100079519153768/'
     },
     {
-        logo: '/farms/farm9.jpg',
-        name: '柑橘園農場',
-        address: '台東縣池上鄉果園村柑橘路789號',
-        telephone: '0966123456',
-        date: '週六與週日',
-        time: '08:30~17:30',
-        description: '主打柑橘類水果種植'
+        id: 9,
+        name: '',
+        contactPerson: '鄭水智',
+        phone: '0910216757',
+        address: '高雄市左營區辛亥路78號11樓',
+        products: [],
+        isOrganic: true,
+        website: ''
     },
     {
-        logo: '/farms/farm10.jpg',
-        name: '藍莓田農場',
-        address: '宜蘭縣三星鄉藍莓路234號',
-        telephone: '0977888999',
-        date: '每日',
-        time: '10:00~18:00',
-        description: '有機藍莓種植與現摘體驗'
+        id: 10,
+        name: '林家有機農園',
+        contactPerson: '林良儒',
+        phone: '0989155503',
+        address: '屏東縣新埤鄉打鐵村東興路108號',
+        products: ['香蕉', '黃金果', '龍眼', '芭樂', '芒果', '刺果番荔枝', '釋迦', '鳳梨'],
+        isOrganic: true,
+        website: ''
     },
     {
-        logo: '/farms/farm11.jpg',
-        name: '葡萄美地農場',
-        address: '台中市霧峰區葡萄路345號',
-        telephone: '0955123344',
-        date: '週三到週日',
-        time: '09:30~17:00',
-        description: '葡萄種植與葡萄酒釀造'
+        id: 11,
+        name: '武山老棠農業有限公司',
+        contactPerson: '蔡瑞棠',
+        phone: '0935669533',
+        address: '屏東縣內埔鄉水門村忠孝路270號',
+        products: ['芒果'],
+        isOrganic: true,
+        website: 'http://ushop30005.ec99.tw/'
     },
     {
-        logo: '/farms/farm12.jpg',
-        name: '椰風農場',
-        address: '屏東縣恆春鎮椰風路12號',
-        telephone: '0966987654',
-        date: '每日',
-        time: '07:00~20:00',
-        description: '熱帶水果與椰子種植'
+        id: 12,
+        name: '',
+        contactPerson: '莊奇陵',
+        phone: '',
+        address: '',
+        products: [],
+        isOrganic: true,
+        website: ''
     },
     {
-        logo: '/farms/farm13.jpg',
-        name: '牧野牧場',
-        address: '花蓮縣壽豐鄉牧場村123號',
-        telephone: '0987345678',
-        date: '週一到週日',
-        time: '06:30~19:00',
-        description: '乳牛飼養與鮮奶製品'
+        id: 13,
+        name: '趣訪有機農園',
+        contactPerson: '張東明',
+        phone: '0932371107',
+        address: '屏東縣萬巒鄉佳和村光明路2-2號',
+        products: [
+            '有機可可堅果',
+            '有機全脂可可粉',
+            '有機可可豆茶',
+            '有機可可豆+桂花茶',
+            'tree to bar 100%黑巧克力',
+            'tree to bar 88%黑巧克力'
+        ],
+        isOrganic: true,
+        website: 'https://www.facebook.com/QuFangFarm/?locale=zh_TW'
     },
     {
-        logo: '/farms/farm14.jpg',
-        name: '蜂蜜樂園農場',
-        address: '雲林縣斗六市蜂蜜路88號',
-        telephone: '0977665544',
-        date: '週二到週日',
-        time: '09:00~17:30',
-        description: '養蜂與天然蜂蜜生產'
+        id: 14,
+        name: '小哥的果香屋',
+        contactPerson: '吳文忠',
+        phone: '',
+        address: '',
+        products: ['黃金果'],
+        isOrganic: true,
+        website: 'https://www.facebook.com/people/小哥的果香屋/100064059218623/'
     }
 ]
+
+export default farms
