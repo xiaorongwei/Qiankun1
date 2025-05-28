@@ -10,36 +10,37 @@
                 <h2>商品頁</h2>
                 <div class="fruit-list">
                     <div
-                        v-for="(fruit, index) in fruits"
+                        v-for="(productItem, index) in filteredProducts"
                         :key="index"
                         class="fruit-item"
-                        @click="goToFruitPage(index)"
+                        @click="openModal(index)"
                     >
-                        <!-- 蔬果資訊並排容器 -->
+                        <!-- 產品資訊並排容器 -->
                         <div class="fruit-content">
-                            <!-- 左邊：蔬果圖片 -->
+                            <!-- 左邊：產品圖片 -->
                             <div class="fruit-logo-container">
-                                <img :src="fruit.logo" :alt="fruit.name" class="fruit-logo" />
+                                <img
+                                    :src="productItem.logo"
+                                    :alt="productItem.product"
+                                    class="fruit-logo"
+                                    @error="handleImageError"
+                                />
                             </div>
-                            <!-- 右邊：蔬果資訊 -->
+                            <!-- 右邊：產品資訊 -->
                             <div class="fruit-info">
-                                <h3 class="fruit-name">{{ fruit.name }}</h3>
+                                <h3 class="fruit-name">{{ productItem.product }}</h3>
                                 <p class="fruit-detail">
                                     <span class="label">農場:</span>
-                                    {{ fruit.farm }}
+                                    {{ productItem.name || '未知農場' }}
                                 </p>
                                 <p class="fruit-detail">
                                     <span class="label">是否為有機:</span>
-                                    {{ fruit.isOrganic ? '是' : '否' }}
+                                    {{ productItem.isOrganic ? '是' : '否' }}
                                 </p>
                                 <p class="fruit-detail">
                                     <span class="label">聯絡資訊:</span>
-                                    {{ fruit.contact }}
+                                    {{ productItem.contactPerson }} {{ productItem.phone }}
                                 </p>
-                                <!-- <p class="fruit-detail fruit-price">
-                                    <span class="label">價格:</span>
-                                    NT${{ fruit.price }} / 公斤
-                                </p> -->
                             </div>
                         </div>
                     </div>
@@ -47,54 +48,133 @@
             </section>
         </main>
 
+        <!-- Modal 視窗 -->
+        <div v-if="showModal" class="modal-overlay" @click="closeModal">
+            <div class="modal-content" @click.stop>
+                <h2>{{ selectedProduct.product }}</h2>
+                <p class="modal-detail">
+                    <span class="label">農場:</span>
+                    {{ selectedProduct.name || '未知農場' }}
+                </p>
+                <p class="modal-detail">
+                    <span class="label">聯絡人:</span>
+                    {{ selectedProduct.contactPerson }}
+                </p>
+                <p class="modal-detail">
+                    <span class="label">電話:</span>
+                    {{ selectedProduct.phone || '無電話' }}
+                </p>
+                <p class="modal-detail">
+                    <span class="label">地址:</span>
+                    {{ selectedProduct.address || '無地址' }}
+                </p>
+                <div class="modal-detail">
+                    <span class="label">產品:</span>
+                    <ul>
+                        <li v-for="(product, idx) in selectedProduct.products" :key="idx">
+                            {{ product }}
+                        </li>
+                    </ul>
+                </div>
+                <p class="modal-detail">
+                    <span class="label">是否為有機:</span>
+                    {{ selectedProduct.isOrganic ? '是' : '否' }}
+                </p>
+                <p class="modal-detail">
+                    <span class="label">網站:</span>
+                    <a
+                        :href="selectedProduct.website"
+                        target="_blank"
+                        v-if="selectedProduct.website"
+                    >
+                        {{ selectedProduct.website }}
+                    </a>
+                    <span v-else>無網站</span>
+                </p>
+                <button @click="closeModal" class="modal-close-btn">關閉</button>
+            </div>
+        </div>
+
         <!-- 頁面底部頁腳 -->
         <Footer />
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
 import Header from '../modules/Header.vue'
 import Footer from '../modules/Footer.vue'
-import { fruitsData } from '../data/fruits' // 導入蔬果數據
+import farmsData from '../data/farms.js'
 
-// 初始化路由
-const router = useRouter()
+// 將農場數據展開為單一產品數據
+const products = ref(
+    farmsData
+        .filter((farm) => farm.name && farm.products.length > 0)
+        .flatMap((farm) =>
+            farm.products.map((product) => ({
+                product,
+                name: farm.name,
+                contactPerson: farm.contactPerson,
+                phone: farm.phone,
+                address: farm.address,
+                products: farm.products, // 保留完整產品列表給 modal
+                isOrganic: farm.isOrganic,
+                website: farm.website,
+                logo: farm.logo
+            }))
+        )
+)
 
-// 蔬果數據，使用外部導入的數據
-const fruits = ref(fruitsData)
+// 過濾產品數據，確保無空數據
+const filteredProducts = computed(() => {
+    return products.value.filter((item) => item.product)
+})
 
-// // 點擊蔬果時跳轉到對應頁面
-// const goToFruitPage = (index) => {
-//     router.push(fruits.value[index].link)
-// }
+// Modal 控制
+const showModal = ref(false)
+const selectedProduct = ref({})
+
+const openModal = (index) => {
+    selectedProduct.value = filteredProducts.value[index]
+    showModal.value = true
+}
+
+const closeModal = () => {
+    showModal.value = false
+    selectedProduct.value = {}
+}
+
+// 圖片載入錯誤處理
+const handleImageError = (event) => {
+    event.target.src = 'https://via.placeholder.com/120?text=無圖片'
+}
 </script>
 
 <style scoped>
 @import '../assets/css/main.css';
+
 /* 整體頁面佈局 */
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* 確保頁面至少填滿視窗高度 */
+    min-height: 100vh;
 }
 
 /* 主要內容 */
 .main-content {
-    flex: 1; /* 讓主要內容佔據剩餘空間，推動 footer 到底部 */
-    background-color: #e5ffc7; /* 與之前的背景色一致 */
+    flex: 1;
+    background-color: #e5ffc7;
     padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* 蔬果展示區樣式 */
+/* 產品展示區樣式 */
 .fruit-section {
     width: 100%;
     max-width: 1200px;
-    margin: 180px 0 20px; /* 調整上邊距，避免被固定 Header 覆蓋 */
+    margin: 180px 0 20px;
     text-align: center;
 }
 
@@ -104,7 +184,7 @@ const fruits = ref(fruitsData)
     margin-bottom: 20px;
 }
 
-/* 蔬果列表佈局 */
+/* 產品列表佈局 */
 .fruit-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -112,7 +192,7 @@ const fruits = ref(fruitsData)
     justify-items: center;
 }
 
-/* 單個蔬果項樣式 */
+/* 單個產品項樣式 */
 .fruit-item {
     cursor: pointer;
     display: flex;
@@ -130,7 +210,7 @@ const fruits = ref(fruitsData)
     transform: scale(1.05);
 }
 
-/* 蔬果內容並排容器 */
+/* 產品內容並排容器 */
 .fruit-content {
     display: flex;
     gap: 15px;
@@ -138,12 +218,15 @@ const fruits = ref(fruitsData)
     width: 100%;
 }
 
-/* 蔬果圖片容器 */
+/* 產品圖片容器 */
 .fruit-logo-container {
-    flex: 0 0 auto;
+    flex: 0 0 33.33%; /* 固定佔據三分之一寬度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* 蔬果圖片樣式 */
+/* 產品圖片樣式 */
 .fruit-logo {
     width: 120px;
     height: 120px;
@@ -152,13 +235,13 @@ const fruits = ref(fruitsData)
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 蔬果資訊容器 */
+/* 產品資訊容器 */
 .fruit-info {
-    flex: 1;
+    flex: 0 0 66.67%; /* 固定佔據三分之二寬度 */
     text-align: left;
 }
 
-/* 蔬果名稱樣式 */
+/* 產品名稱樣式 */
 .fruit-name {
     font-size: 18px;
     color: #5d4037;
@@ -166,22 +249,82 @@ const fruits = ref(fruitsData)
     margin-bottom: 10px;
 }
 
-/* 蔬果詳細資訊樣式 */
+/* 產品詳細資訊樣式 */
 .fruit-detail {
     font-size: 14px;
     color: #5d4037;
     margin: 5px 0;
 }
 
-/* 價格樣式 */
-.fruit-price {
-    color: #d32f2f;
-    font-weight: bold;
-}
-
-/* 標籤樣式（例如 "農場:"） */
+/* 標籤樣式 */
 .label {
     font-weight: bold;
     color: #4caf50;
+}
+
+/* Modal 樣式 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.modal-content h2 {
+    color: #5d4037;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal-detail {
+    font-size: 14px;
+    color: #5d4037;
+    margin: 10px 0;
+}
+
+.modal-detail .label {
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.modal-detail ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.modal-detail a {
+    color: #4caf50;
+    text-decoration: underline;
+}
+
+.modal-close-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+    background-color: #388e3c;
 }
 </style>
