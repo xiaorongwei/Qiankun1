@@ -20,15 +20,15 @@
                             <!-- 左邊：產品圖片 -->
                             <div class="fruit-logo-container">
                                 <img
-                                    :src="productItem.logo"
-                                    :alt="productItem.product"
+                                    :src="productItem.productLogo"
+                                    :alt="productItem.productName"
                                     class="fruit-logo"
                                     @error="handleImageError"
                                 />
                             </div>
                             <!-- 右邊：產品資訊 -->
                             <div class="fruit-info">
-                                <h3 class="fruit-name">{{ productItem.product }}</h3>
+                                <h3 class="fruit-name">{{ productItem.productName }}</h3>
                                 <p class="fruit-detail">
                                     <span class="label">農場:</span>
                                     {{ productItem.name || '未知農場' }}
@@ -51,7 +51,7 @@
         <!-- Modal 視窗 -->
         <div v-if="showModal" class="modal-overlay" @click="closeModal">
             <div class="modal-content" @click.stop>
-                <h2>{{ selectedProduct.product }}</h2>
+                <h2>{{ selectedProduct.productName }}</h2>
                 <p class="modal-detail">
                     <span class="label">農場:</span>
                     {{ selectedProduct.name || '未知農場' }}
@@ -71,8 +71,8 @@
                 <div class="modal-detail">
                     <span class="label">產品:</span>
                     <ul>
-                        <li v-for="(product, idx) in selectedProduct.products" :key="idx">
-                            {{ product }}
+                        <li v-for="(product, idx) in selectedProduct.allProducts" :key="idx">
+                            {{ product.products_name }}
                         </li>
                     </ul>
                 </div>
@@ -109,15 +109,16 @@ import farmsData from '../data/farms.js'
 // 將農場數據展開為單一產品數據
 const products = ref(
     farmsData
-        .filter((farm) => farm.name && farm.products.length > 0)
+        .filter((farm) => farm.name && farm.products.length > 0) // 過濾有名稱和產品的農場
         .flatMap((farm) =>
             farm.products.map((product) => ({
-                product,
-                name: farm.name,
+                productName: product.products_name, // 產品名稱
+                productLogo: product.products_logo || '', // 產品圖片（如果為空則保持空）
+                name: farm.name, // 農場名稱
                 contactPerson: farm.contactPerson,
                 phone: farm.phone,
                 address: farm.address,
-                products: farm.products, // 保留完整產品列表給 modal
+                allProducts: farm.products, // 保留完整產品列表給 modal
                 isOrganic: farm.isOrganic,
                 website: farm.website,
                 logo: farm.logo
@@ -127,7 +128,7 @@ const products = ref(
 
 // 過濾產品數據，確保無空數據
 const filteredProducts = computed(() => {
-    return products.value.filter((item) => item.product)
+    return products.value.filter((item) => item.productName)
 })
 
 // Modal 控制
@@ -146,7 +147,7 @@ const closeModal = () => {
 
 // 圖片載入錯誤處理
 const handleImageError = (event) => {
-    event.target.src = 'https://via.placeholder.com/120?text=無圖片'
+    event.target.src = '../farms/products/敬請期待.jpg'
 }
 </script>
 

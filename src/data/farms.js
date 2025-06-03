@@ -5,9 +5,13 @@ const farms = [
         contactPerson: '王乾坤',
         phone: '0937692657',
         address: '屏東縣萬巒鄉新厝村6鄰新平路73號',
-        products: ['荔枝', '芭樂'],
+        products: [
+            { products_name: '荔枝', products_logo: '../farms/products/荔枝2.jpg' },
+            { products_name: '芭樂', products_logo: '../farms/products/芭樂.jpg' }
+        ],
         isOrganic: true,
-        website: 'https://www.facebook.com/ChienKunFarm/'
+        website: 'https://www.facebook.com/ChienKunFarm/',
+        logo: '../farms/乾坤.jpg'
     },
     {
         id: 2,
@@ -15,9 +19,10 @@ const farms = [
         contactPerson: '翁錦珍',
         phone: '0956291265',
         address: '屏東縣里港鄉茄冬村茄冬路7號',
-        products: ['檸檬'],
+        products: [{ products_name: '檸檬', products_logo: '../farms/products/檸檬.jpg' }],
         isOrganic: true,
-        website: 'https://www.facebook.com/liganglemon/'
+        website: 'https://www.facebook.com/liganglemon/',
+        logo: '../farms/檸檬.jpg'
     },
     {
         id: 3,
@@ -25,9 +30,13 @@ const farms = [
         contactPerson: '吳永勝',
         phone: '0925769192',
         address: '屏東縣瑪家鄉三和村美園31號',
-        products: ['木瓜', '蕃茄'],
+        products: [
+            { products_name: '木瓜', products_logo: '../farms/products/木瓜.jpg' },
+            { products_name: '蕃茄', products_logo: '../farms/products/番茄.jpg' }
+        ],
         isOrganic: true,
-        website: 'https://www.facebook.com/as443/'
+        website: 'https://www.facebook.com/as443/',
+        logo: '../farms/永勝有機園.jpg'
     },
     {
         id: 4,
@@ -35,9 +44,10 @@ const farms = [
         contactPerson: '蔡昌殷',
         phone: '0932733072',
         address: '高雄市大寮區大發工業區華中路28號',
-        products: ['火龍果'],
+        products: [{ products_name: '火龍果', products_logo: '' }],
         isOrganic: true,
-        website: 'https://www.facebook.com/sutsaifarm'
+        website: 'https://www.facebook.com/sutsaifarm',
+        logo: '../farms/蘇蔡農場.jpg'
     },
     {
         id: 5,
@@ -45,9 +55,15 @@ const farms = [
         contactPerson: '黃穎',
         phone: '0937384919',
         address: '屏東縣竹田鄉二崙村義和路2-50號',
-        products: ['金銀花及金銀花相關產品'],
+        products: [
+            {
+                products_name: '金銀花及金銀花相關產品',
+                products_logo: '../farms/products/金針花.jpg'
+            }
+        ],
         isOrganic: true,
-        website: 'https://www.facebook.com/552gphxb'
+        website: 'https://www.facebook.com/552gphxb',
+        logo: '../farms/金銀花.jpg'
     },
     {
         id: 6,
@@ -55,9 +71,13 @@ const farms = [
         contactPerson: '張魯華',
         phone: '0932883448',
         address: '屏東市廣興里廣興126-5號',
-        products: ['檸檬', '金桔'],
+        products: [
+            { products_name: '檸檬', products_logo: '../farms/products/巴轆_檸檬.jpg' },
+            { products_name: '金桔', products_logo: '' }
+        ],
         isOrganic: true,
-        website: 'https://www.facebook.com/baruorganicfarm/'
+        website: 'https://www.facebook.com/baruorganicfarm/',
+        logo: '../farms/巴轆.jpg'
     },
     {
         id: 7,
@@ -65,9 +85,18 @@ const farms = [
         contactPerson: '徐振鐘',
         phone: '0912499603',
         address: '屏東縣竹田鄉泗洲村洲中路52號',
-        products: ['扁實檸檬', '紅龍果', '酪梨', '番石榴', '山刺番荔枝', '紅毛丹', '山竹'],
+        products: [
+            { products_name: '扁實檸檬', products_logo: '' },
+            { products_name: '紅龍果', products_logo: '' },
+            { products_name: '酪梨', products_logo: '' },
+            { products_name: '番石榴', products_logo: '' },
+            { products_name: '山刺番荔枝', products_logo: '' },
+            { products_name: '紅毛丹', products_logo: '' },
+            { products_name: '山竹', products_logo: '' }
+        ],
         isOrganic: true,
-        website: 'https://www.i-organic.org.tw/farm/HOAF1169/'
+        website: 'https://www.i-organic.org.tw/farm/HOAF1169/',
+        logo: ''
     },
     {
         id: 8,
@@ -75,9 +104,13 @@ const farms = [
         contactPerson: '李宗達',
         phone: '0918092890',
         address: '屏東縣萬巒鄉信敏路207號',
-        products: ['澳洲茶樹', '洛神'],
+        products: [
+            { products_name: '澳洲茶樹', products_logo: '' },
+            { products_name: '洛神', products_logo: '' }
+        ],
         isOrganic: true,
-        website: 'https://www.facebook.com/people/成德寬居有機農場/100079519153768/'
+        website: 'https://www.facebook.com/people/成德寬居有機農場/100079519153768/',
+        logo: '../farms/成德寬居有機農場.jpg'
     },
     {
         id: 9,
@@ -87,7 +120,8 @@ const farms = [
         address: '高雄市左營區辛亥路78號11樓',
         products: [],
         isOrganic: true,
-        website: ''
+        website: '',
+        logo: ''
     },
     {
         id: 10,
@@ -95,9 +129,19 @@ const farms = [
         contactPerson: '林良儒',
         phone: '0989155503',
         address: '屏東縣新埤鄉打鐵村東興路108號',
-        products: ['香蕉', '黃金果', '龍眼', '芭樂', '芒果', '刺果番荔枝', '釋迦', '鳳梨'],
+        products: [
+            { products_name: '香蕉', products_logo: '' },
+            { products_name: '黃金果', products_logo: '' },
+            { products_name: '龍眼', products_logo: '' },
+            { products_name: '芭樂', products_logo: '' },
+            { products_name: '芒果', products_logo: '' },
+            { products_name: '刺果番荔枝', products_logo: '' },
+            { products_name: '釋迦', products_logo: '' },
+            { products_name: '鳳梨', products_logo: '' }
+        ],
         isOrganic: true,
-        website: ''
+        website: '',
+        logo: ''
     },
     {
         id: 11,
@@ -105,9 +149,10 @@ const farms = [
         contactPerson: '蔡瑞棠',
         phone: '0935669533',
         address: '屏東縣內埔鄉水門村忠孝路270號',
-        products: ['芒果'],
+        products: [{ products_name: '芒果', products_logo: '../farms/products/芒果.jpg' }],
         isOrganic: true,
-        website: 'http://ushop30005.ec99.tw/'
+        website: 'http://ushop30005.ec99.tw/',
+        logo: '../farms/武山老棠.jpg'
     },
     {
         id: 12,
@@ -117,7 +162,8 @@ const farms = [
         address: '',
         products: [],
         isOrganic: true,
-        website: ''
+        website: '',
+        logo: ''
     },
     {
         id: 13,
@@ -126,15 +172,16 @@ const farms = [
         phone: '0932371107',
         address: '屏東縣萬巒鄉佳和村光明路2-2號',
         products: [
-            '有機可可堅果',
-            '有機全脂可可粉',
-            '有機可可豆茶',
-            '有機可可豆+桂花茶',
-            'tree to bar 100%黑巧克力',
-            'tree to bar 88%黑巧克力'
+            { products_name: '有機可可堅果', products_logo: '' },
+            { products_name: '有機全脂可可粉', products_logo: '' },
+            { products_name: '有機可可豆茶', products_logo: '' },
+            { products_name: '有機可可豆+桂花茶', products_logo: '' },
+            { products_name: 'tree to bar 100%黑巧克力', products_logo: '' },
+            { products_name: 'tree to bar 88%黑巧克力', products_logo: '' }
         ],
         isOrganic: true,
-        website: 'https://www.facebook.com/QuFangFarm/?locale=zh_TW'
+        website: 'https://www.facebook.com/QuFangFarm/?locale=zh_TW',
+        logo: '../farms/趣訪有機農園-可可咖啡.jpg'
     },
     {
         id: 14,
@@ -142,9 +189,10 @@ const farms = [
         contactPerson: '吳文忠',
         phone: '',
         address: '',
-        products: ['黃金果'],
+        products: [{ products_name: '黃金果', products_logo: '../farms/products/14_黃金果.jpg' }],
         isOrganic: true,
-        website: 'https://www.facebook.com/people/小哥的果香屋/100064059218623/'
+        website: 'https://www.facebook.com/people/小哥的果香屋/100064059218623/',
+        logo: ''
     }
 ]
 

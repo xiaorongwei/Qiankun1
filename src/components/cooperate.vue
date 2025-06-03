@@ -42,9 +42,12 @@
                                 </p>
                                 <p class="farm-detail">
                                     <span class="label">產品:</span>
+                                    <!-- 修正產品顯示邏輯 -->
                                     {{
                                         Array.isArray(farm.products) && farm.products.length > 0
-                                            ? farm.products.join(', ')
+                                            ? farm.products
+                                                  .map((product) => product.products_name)
+                                                  .join(', ')
                                             : '未提供'
                                     }}
                                 </p>
@@ -70,7 +73,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Header from '../modules/Header.vue'
 import Footer from '../modules/Footer.vue'
-import farmsData from '../data/farms.js' // 改為 default 匯入
+import farmsData from '../data/farms.js'
 
 // 初始化路由
 const router = useRouter()
@@ -89,7 +92,7 @@ const goToFarmPage = (farm) => {
 
 // 處理農場 Logo，當無 Logo 時使用佔位圖片
 const getFarmLogo = (farm) => {
-    return '../farms/farm.jpg'
+    return farm.logo || '../farms/farm.jpg'
 }
 </script>
 
@@ -109,7 +112,6 @@ const getFarmLogo = (farm) => {
     align-items: center;
 }
 
-/* ⭐ 調整這裡 */
 .farm-section {
     width: 100%;
     max-width: 1200px;
