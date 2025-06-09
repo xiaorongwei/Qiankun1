@@ -110,7 +110,7 @@ onUnmounted(() => {
 /* 單張幻燈片樣式 */
 .slide {
     width: 100%; /* 每張幻燈片寬度與容器一致 */
-    height: 400px; /* 固定高度 */
+    height: 500px; /* 固定高度 */
     flex-shrink: 0; /* 防止圖片縮小 */
     position: relative;
     background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); /* 漸層背景 */

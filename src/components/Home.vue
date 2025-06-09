@@ -1,6 +1,6 @@
 <template>
     <div class="page-wrapper">
-        <!-- 導航欄：包含 Logo 和導航連結 -->
+        <!-- 頁面頂部導航欄 -->
         <Header />
 
         <!-- 幻燈片 -->
@@ -8,26 +8,32 @@
 
         <!-- 主要內容 -->
         <main class="main-content">
-            <!-- 上傳區域：允許用戶上傳圖片和文案 -->
-            <div class="upload-section">
-                <input type="file" accept="image/*" @change="handleImageUpload" ref="imageInput" />
-                <textarea
-                    v-model="postText"
-                    placeholder="輸入你的文案..."
-                    class="post-input"
-                ></textarea>
-                <button @click="submitPost" class="submit-btn">發布</button>
-            </div>
+            <!-- 成立宗旨 -->
+            <section class="article-section">
+                <h2 class="article-title">成立宗旨</h2>
+                <div class="article-divider"></div>
+                <p class="article-description">
+                    大武有機生產合作社秉持著以下理念，致力推動有機農業的永續發展：
+                    <br />
+                    <br />
+                    -
+                    <strong>友善環境</strong>
+                    ：守護土地與生態環境，減少化學物質使用。
+                    <br />
+                    -
+                    <strong>健康生活</strong>
+                    ：提供消費者健康無毒的農產品。
+                    <br />
+                    -
+                    <strong>在地共好</strong>
+                    ：實現農業與社區的共生共榮。
+                    <br />
+                    <br />
+                    透過整合在地有機農友資源、建立安全溯源的農產品通路，我們希望成為農友互助的平台，同時串聯生產與消費、農村與都市之間的重要橋樑。透過教育推廣、資源共享與市場拓展，期望為有機農業注入活力，創造一個公平、永續且充滿希望的未來。
+                </p>
+            </section>
 
-            <!-- 貼文顯示區域：顯示用戶上傳的圖片和文案 -->
-            <div class="posts">
-                <div v-for="(post, index) in posts" :key="index" class="post">
-                    <img v-if="post.image" :src="post.image" class="post-image" />
-                    <p>{{ post.text }}</p>
-                </div>
-            </div>
-
-            <!-- 文章區域 -->
+            <!-- 景點特色 -->
             <section class="article-section">
                 <h2 class="article-title">景點特色</h2>
                 <div class="article-divider"></div>
@@ -70,145 +76,70 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Footer from '../modules/Footer.vue'
 import Header from '../modules/Header.vue'
 import Slideshow from '../modules/Slideshow.vue'
 
+// 初始化路由
 const router = useRouter()
-
-// 上傳相關
-const imageInput = ref(null)
-const postText = ref('')
-const posts = ref([])
-
-const handleImageUpload = (event) => {
-    const file = event.target.files[0]
-    if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-            posts.value.unshift({ image: e.target.result, text: '' })
-        }
-        reader.readAsDataURL(file)
-    }
-}
-
-const submitPost = () => {
-    if (postText.value) {
-        if (posts.value.length > 0 && !posts.value[0].text) {
-            posts.value[0].text = postText.value
-        } else {
-            posts.value.unshift({ image: null, text: postText.value })
-        }
-        postText.value = ''
-        imageInput.value.value = ''
-    }
-}
 </script>
 
 <style scoped>
 @import '../assets/css/main.css';
+
 /* 整體頁面佈局 */
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* 確保頁面至少填滿視窗高度 */
+    min-height: 100vh;
 }
 
 /* 主要內容 */
 .main-content {
-    flex: 1; /* 讓主要內容佔據剩餘空間，推動 footer 到底部 */
-    background-color: #e5ffc7; /* 與之前的背景色一致 */
-    padding: 30px;
+    flex: 1;
+    background-color: #e5ffc7;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* 上傳區域 */
-.upload-section {
-    width: 100%;
-    max-width: 800px;
-    margin: 20px 0;
-}
-
-.post-input {
-    width: 100%;
-    height: 100px;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #8d6e63;
-}
-
-.submit-btn {
-    background-color: #8d6e63;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.submit-btn:hover {
-    background-color: #6d4c41;
-}
-
-/* 貼文區域 */
-.posts {
-    width: 100%;
-    max-width: 800px;
-}
-
-.post {
-    background: white;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-.post-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* 調整 Slideshow 的 margin-top，避免被 header 覆蓋 */
-:deep(.slideshow) {
-    margin-top: 180px; /* 根據 header 高度調整 */
-}
-
-/* 文章區域樣式 */
+/* 文章區域 */
 .article-section {
     width: 100%;
-    max-width: 1200px;
-    margin: 40px 0;
-    padding: 0 20px;
+    max-width: 1000px;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 /* 文章標題 */
 .article-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #4a3c31;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 /* 文章標題下的分隔線 */
 .article-divider {
-    width: 50px;
-    height: 3px;
-    background-color: #ff4d4f;
-    margin-bottom: 20px;
+    width: 60px;
+    height: 4px;
+    background-color: #ff6b6b;
+    margin: 0 auto 25px;
+    border-radius: 2px;
 }
 
 /* 文章描述 */
 .article-description {
     font-size: 16px;
-    color: #333;
-    line-height: 1.6;
+    color: #5d4037;
+    line-height: 1.8;
+    text-align: justify;
     margin-bottom: 30px;
 }
 
@@ -216,26 +147,35 @@ const submitPost = () => {
 .article-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 /* 單個文章區塊 */
 .article-item {
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 /* 文章區塊標題 */
 .article-item-title {
     font-size: 18px;
-    font-weight: bold;
-    color: #000;
-    padding: 15px;
+    font-weight: 600;
+    color: #4a3c31;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
     gap: 10px;
+    background-color: #f5f5f5;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.article-item-title:hover {
+    background-color: #ececec;
 }
 
 /* 圖標樣式 */
@@ -245,13 +185,14 @@ const submitPost = () => {
 
 /* 文章內容 */
 .article-content {
-    padding: 15px;
+    padding: 20px;
     font-size: 14px;
-    color: #333;
-    line-height: 1.6;
+    color: #5d4037;
+    line-height: 1.8;
+    background-color: #fafafa;
 }
 
-/* 移除 details 的預設箭頭（可選） */
+/* 移除 details 的預設箭頭 */
 .article-item summary::-webkit-details-marker {
     display: none;
 }
@@ -260,10 +201,16 @@ const submitPost = () => {
     content: '▼';
     font-size: 12px;
     margin-left: auto;
+    transition: transform 0.3s ease;
 }
 
 /* 展開時旋轉箭頭 */
 .article-item[open] summary::after {
-    content: '▲';
+    transform: rotate(180deg);
+}
+
+/* Slideshow 調整 */
+:deep(.slideshow) {
+    margin-top: 180px;
 }
 </style>

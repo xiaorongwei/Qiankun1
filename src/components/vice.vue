@@ -15,8 +15,16 @@
                     <div class="image-gallery">
                         <img :src="item.image" alt="農夫照片" class="about-image" />
                     </div>
-                    <!-- 描述文字 -->
-                    <p class="about-description">{{ item.description }}</p>
+                    <!-- 描述文字，分段顯示 -->
+                    <div class="about-description">
+                        <p
+                            v-for="(paragraph, pIndex) in item.description"
+                            :key="pIndex"
+                            class="paragraph"
+                        >
+                            {{ `　　${paragraph}` }}
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -28,7 +36,13 @@
                         {{ item.title }}
                     </summary>
                     <div class="article-content">
-                        {{ item.description }}
+                        <p
+                            v-for="(paragraph, pIndex) in item.description"
+                            :key="pIndex"
+                            class="paragraph"
+                        >
+                            {{ `　　${paragraph}` }}
+                        </p>
                     </div>
                 </details>
             </div>
@@ -41,10 +55,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router' // 導入 Vue Router 的 useRouter
-import Footer from '../modules/Footer.vue' // 導入 Footer 組件
+import { useRouter } from 'vue-router'
+import Footer from '../modules/Footer.vue'
 import Header from '../modules/Header.vue'
-import { aboutData } from '../data/aboutData.js' // 導入 JS 檔案
+import { aboutData } from '../data/aboutData.js'
 
 // 初始化路由
 const router = useRouter()
@@ -57,39 +71,19 @@ const aboutDataRef = ref(aboutData)
 @import '../assets/css/main.css';
 /* 整體容器樣式 */
 .home {
-    background-color: #e5ffc7; /* 淺灰色背景，符合參考畫面 */
-    min-height: 100vh; /* 確保頁面至少填滿視窗高度 */
+    background-color: #e5ffc7;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 內容居中對齊 */
+    align-items: center;
 }
 
 /* 關於我們區域樣式 */
 .about-section {
     width: 100%;
-    max-width: 1200px; /* 與其他區域對齊 */
-    margin: 180px 0 40px; /* 調整上邊距，避免被固定 Header 覆蓋 */
+    max-width: 1200px;
+    margin: 180px 0 40px;
     padding: 0 20px;
-}
-
-/* 標題和 Logo 區域 */
-.about-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.about-logo {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.about-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333;
 }
 
 /* 圖片和描述區域 */
@@ -98,31 +92,31 @@ const aboutDataRef = ref(aboutData)
     flex-direction: column;
     gap: 20px;
     margin-bottom: 30px;
-    background-color: #e8f5e9; /* 淺綠色背景，接近自然 */
-    border: 1px solid #c8e6c9; /* 淺綠色邊框 */
-    border-radius: 10px; /* 圓角 */
-    padding: 20px; /* 內邊距，讓內容有呼吸空間 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 輕微陰影，增加層次感 */
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 區塊標題 */
 .content-title {
     font-size: 22px;
     font-weight: bold;
-    color: #4caf50; /* 深綠色標題，符合自然主題 */
+    color: #4caf50;
     margin-bottom: 15px;
 }
 
 /* 圖片和描述並排容器 */
 .content-row {
     display: flex;
-    gap: 20px; /* 圖片和描述之間的間距 */
-    align-items: flex-start; /* 圖片和描述頂部對齊 */
+    gap: 20px;
+    align-items: flex-start;
 }
 
 /* 圖片展示區域 */
 .image-gallery {
-    flex: 0 0 auto; /* 圖片區域不自動縮放 */
+    flex: 0 0 auto;
 }
 
 .about-image {
@@ -132,11 +126,20 @@ const aboutDataRef = ref(aboutData)
     border-radius: 5px;
 }
 
+/* 描述文字 */
 .about-description {
+    flex: 1;
+}
+
+.paragraph {
     font-size: 16px;
     color: #333;
     line-height: 1.6;
-    flex: 1; /* 描述文字佔據剩餘空間 */
+    margin-bottom: 15px; /* 段落間距 */
+}
+
+.paragraph:last-child {
+    margin-bottom: 0; /* 最後一段無下邊距 */
 }
 
 /* 文章區域樣式 */
@@ -146,9 +149,9 @@ const aboutDataRef = ref(aboutData)
 
 /* 單個文章區塊 */
 .article-item {
-    background-color: #fff; /* 白色背景 */
-    border: 1px solid #ddd; /* 邊框 */
-    border-radius: 5px; /* 圓角 */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 /* 文章區塊標題 */
@@ -159,7 +162,7 @@ const aboutDataRef = ref(aboutData)
     padding: 15px;
     display: flex;
     align-items: center;
-    gap: 10px; /* 圖標和文字之間的間距 */
+    gap: 10px;
     cursor: pointer;
 }
 
@@ -171,9 +174,17 @@ const aboutDataRef = ref(aboutData)
 /* 文章內容 */
 .article-content {
     padding: 15px;
+}
+
+.article-content .paragraph {
     font-size: 14px;
     color: #333;
     line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.article-content .paragraph:last-child {
+    margin-bottom: 0;
 }
 
 /* 移除 details 的預設箭頭 */
