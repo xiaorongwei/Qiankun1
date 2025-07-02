@@ -1,23 +1,19 @@
 <template>
     <div class="page-wrapper">
-        <!-- 頁面頂部導航欄 -->
         <Header />
 
-        <!-- 主要內容 -->
         <main class="main-content">
-            <!-- 合作蔬果展示區 -->
             <section class="fruit-section">
-                <h2>商品頁</h2>
-                <div class="fruit-list">
+                <h2>商品頁 {{ farmId.value ? `- ${getFarmName(farmId.value)}` : '' }}</h2>
+
+                <div v-if="filteredProducts.length > 0" class="fruit-list">
                     <div
                         v-for="(productItem, index) in filteredProducts"
                         :key="index"
                         class="fruit-item"
                         @click="openModal(index)"
                     >
-                        <!-- 產品資訊並排容器 -->
                         <div class="fruit-content">
-                            <!-- 左邊：產品圖片 -->
                             <div class="fruit-logo-container">
                                 <img
                                     :src="productItem.productLogo"
@@ -26,7 +22,6 @@
                                     @error="handleImageError"
                                 />
                             </div>
-                            <!-- 右邊：產品資訊 -->
                             <div class="fruit-info">
                                 <h3 class="fruit-name">{{ productItem.productName }}</h3>
                                 <p class="fruit-detail">
@@ -45,10 +40,15 @@
                         </div>
                     </div>
                 </div>
+
+                <p v-else style="color: red; font-weight: bold">
+                    查無符合關鍵字「{{ keyword }}」或農場的商品。
+                    <router-link to="/commodity">查看所有商品</router-link>
+                </p>
             </section>
         </main>
 
-        <!-- Modal 視窗 -->
+        <!-- Modal 彈窗 -->
         <div v-if="showModal" class="modal-overlay" @click="closeModal">
             <div class="modal-content" @click.stop>
                 <h2>{{ selectedProduct.productName }}</h2>
@@ -95,41 +95,75 @@
             </div>
         </div>
 
-        <!-- 頁面底部頁腳 -->
         <Footer />
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import Header from '../modules/Header.vue'
 import Footer from '../modules/Footer.vue'
 import farmsData from '../data/farms.js'
 
-// 將農場數據展開為單一產品數據
+// 抓取 route query
+const route = useRoute()
+const keyword = ref('')
+const farmId = ref('')
+
+// 初始化：抓取網址上的關鍵字和農場 ID
+onMounted(() => {
+    if (route.query.product) {
+        keyword.value = route.query.product.toString().trim().toLowerCase()
+    }
+    if (route.query.farmId) {
+        farmId.value = route.query.farmId.toString().trim()
+    }
+})
+
+// 組合所有產品資料
 const products = ref(
     farmsData
-        .filter((farm) => farm.name && farm.products.length > 0) // 過濾有名稱和產品的農場
+        .filter((farm) => farm.name && farm.products.length > 0)
         .flatMap((farm) =>
             farm.products.map((product) => ({
-                productName: product.products_name, // 產品名稱
-                productLogo: product.products_logo || '', // 產品圖片（如果為空則保持空）
-                name: farm.name, // 農場名稱
+                productName: product.products_name,
+                productLogo: product.products_logo || '',
+                name: farm.name,
                 contactPerson: farm.contactPerson,
                 phone: farm.phone,
                 address: farm.address,
-                allProducts: farm.products, // 保留完整產品列表給 modal
+                allProducts: farm.products,
                 isOrganic: farm.isOrganic,
                 website: farm.website,
-                logo: farm.logo
+                logo: farm.logo,
+                farmId: farm.id
             }))
         )
 )
 
-// 過濾產品數據，確保無空數據
+// 根據 keyword 和 farmId 過濾產品
 const filteredProducts = computed(() => {
-    return products.value.filter((item) => item.productName)
+    let filtered = products.value
+
+    // 農場過濾
+    if (farmId.value) {
+        filtered = filtered.filter((item) => item.farmId.toString() === farmId.value)
+    }
+
+    // 產品名稱過濾
+    if (keyword.value) {
+        filtered = filtered.filter((item) => item.productName.toLowerCase().includes(keyword.value))
+    }
+
+    return filtered
 })
+
+// 獲取農場名稱
+const getFarmName = (id) => {
+    const farm = farmsData.find((farm) => farm.id.toString() === id)
+    return farm ? farm.name : ''
+}
 
 // Modal 控制
 const showModal = ref(false)
@@ -145,7 +179,7 @@ const closeModal = () => {
     selectedProduct.value = {}
 }
 
-// 圖片載入錯誤處理
+// 圖片錯誤處理
 const handleImageError = (event) => {
     event.target.src = '../farms/products/敬請期待.jpg'
 }

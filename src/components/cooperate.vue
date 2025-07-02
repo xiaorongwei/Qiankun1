@@ -92,7 +92,7 @@ const goToFarmPage = (farm) => {
 
 // 處理農場 Logo，當無 Logo 時使用佔位圖片
 const getFarmLogo = (farm) => {
-    return farm.logo || '../farms/farm.jpg'
+    return farm.logo || '../farms/products/敬請期待.jpg'
 }
 </script>
 

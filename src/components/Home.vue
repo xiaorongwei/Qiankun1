@@ -34,13 +34,13 @@
             </section>
 
             <!-- 景點特色 -->
-            <section class="article-section">
+            <!-- <section class="article-section">
                 <h2 class="article-title">景點特色</h2>
                 <div class="article-divider"></div>
-                <p class="article-description">這裡是文章描述的簡介</p>
+                <p class="article-description">這裡是文章描述的簡介</p> -->
 
-                <!-- 可下拉文章區塊 -->
-                <div class="article-list">
+            <!-- 可下拉文章區塊 -->
+            <!--<div class="article-list">
                     <details class="article-item">
                         <summary class="article-item-title">
                             <span class="icon">🚌</span>
@@ -54,10 +54,10 @@
                             <h3>大眾運輸:</h3>
                             <p>根據需求自行填寫</p>
                         </div>
-                    </details>
+                    </details>-->
 
-                    <!-- 附近交通資訊 -->
-                    <details class="article-item">
+            <!-- 附近交通資訊 -->
+            <!--<details class="article-item">
                         <summary class="article-item-title">
                             <span class="icon">🚗</span>
                             附近交通資訊
@@ -67,7 +67,7 @@
                         </div>
                     </details>
                 </div>
-            </section>
+            </section> -->
         </main>
 
         <!-- 頁尾 -->

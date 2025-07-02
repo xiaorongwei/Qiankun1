@@ -7,8 +7,10 @@ import cooperate from '../components/cooperate.vue'
 import Commodity from '../components/commodity.vue'
 import Certificate from '../components/Certificate.vue' // 新增有機證書組件
 import NotFound from '../components/NotFound.vue'
+import Redirect from '../components/Redirect.vue'
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'home',
         component: Home,
@@ -55,6 +57,12 @@ const routes = [{
         name: 'notFound',
         component: NotFound,
         meta: { title: '404 - 頁面未找到' }
+    },
+    {
+        path: '/redirect',
+        name: 'Redirect',
+        component: Redirect,
+        meta: { title: '跳轉中...' }
     }
 ]
 

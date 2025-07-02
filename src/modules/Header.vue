@@ -1,22 +1,44 @@
-<!-- src/modules/Header.vue -->
 <template>
     <header class="header">
-        <!-- 頂部導航欄 -->
         <div class="topbar">
             <div class="topbar-content">
-                <!-- 搜尋框 -->
-                <input type="text" placeholder="請輸入關鍵字搜尋商品" class="search-bar" />
-                <!-- Logo 和標題獨立區域 -->
+                <input
+                    type="text"
+                    v-model="searchQuery"
+                    placeholder="請輸入關鍵字搜尋商品或農場"
+                    class="search-bar"
+                    @keyup.enter="navigateToResult"
+                />
+
                 <div class="logo-title-container">
                     <img src="/logo.png" alt="Logo" class="logo" />
                     <h1 class="title">大武有機生產合作社</h1>
                 </div>
             </div>
+
+            <!-- 搜尋建議 -->
+            <div class="search-suggestions" v-if="filteredResults.length > 0 && searchQuery">
+                <ul>
+                    <li
+                        v-for="item in filteredResults"
+                        :key="item.id"
+                        @click="navigateToResultItem(item)"
+                    >
+                        <template v-if="item.type === 'product'">
+                            <strong>{{ item.productName }}</strong>
+                            - 來自: {{ item.farmName }}
+                        </template>
+                        <template v-else-if="item.type === 'farm'">
+                            查看
+                            <strong>{{ item.farmName }}</strong>
+                            農場所有商品
+                        </template>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 主導航欄 -->
         <nav class="navbar">
-            <!-- 導航連結 -->
             <div class="nav-links">
                 <router-link to="/" class="navbar-link">🏡首頁</router-link>
                 <router-link to="/cooperate" class="navbar-link">📚會員名冊</router-link>
@@ -31,29 +53,91 @@
                         </router-link>
                     </div>
                 </div>
-
-                <div class="dropdown">
-                    <span class="navbar-link dropdown-toggle">📨活動消息</span>
-                    <div class="dropdown-menu">
-                        <router-link to="/highlights" class="dropdown-item">📅最新活動</router-link>
-                        <router-link to="/activity-highlights" class="dropdown-item">
-                            🗂️活動花絮
-                        </router-link>
-                    </div>
-                </div>
             </div>
         </nav>
     </header>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import farms from '../data/farms'
 
 const router = useRouter()
+const searchQuery = ref('')
+
+// 商品與農場混合搜尋結果
+const filteredResults = computed(() => {
+    if (!searchQuery.value) return []
+    const query = searchQuery.value.toLowerCase().trim()
+
+    // 商品搜尋
+    const fromProducts = farms.flatMap((farm) =>
+        farm.products
+            .filter((product) => product.products_name.toLowerCase().includes(query))
+            .map((product) => ({
+                type: 'product',
+                id: `${farm.id}-${product.products_name}`,
+                productName: product.products_name,
+                farmName: farm.name,
+                farmId: farm.id
+            }))
+    )
+
+    // 農場搜尋
+    const fromFarms = farms
+        .filter((farm) => farm.name.toLowerCase().includes(query))
+        .map((farm) => ({
+            type: 'farm',
+            id: `farm-${farm.id}`,
+            farmName: farm.name,
+            farmId: farm.id
+        }))
+
+    return [...fromProducts, ...fromFarms]
+})
+// 跳轉頁面
+const forceNavigateTo = (productName = null, farmId = null) => {
+    const newQuery = {
+        ...(productName ? { product: productName } : {}),
+        ...(farmId ? { farmId } : {})
+    }
+
+    if (router.currentRoute.value.path === '/commodity') {
+        router.push({ path: '/redirect', query: newQuery })
+    } else {
+        router.push({ path: '/commodity', query: newQuery })
+    }
+}
+
+// 按 Enter 搜尋
+const navigateToResult = () => {
+    if (!searchQuery.value) return
+    const result = filteredResults.value[0]
+    if (result) {
+        if (result.type === 'product') {
+            forceNavigateTo(result.productName) // 僅傳遞產品名稱
+        } else if (result.type === 'farm') {
+            forceNavigateTo(null, result.farmId) // 農場搜尋傳遞 farmId
+        }
+    } else {
+        forceNavigateTo(searchQuery.value) // 無建議時傳遞搜尋關鍵字
+    }
+    searchQuery.value = ''
+}
+
+// 點選搜尋建議
+const navigateToResultItem = (item) => {
+    if (item.type === 'product') {
+        forceNavigateTo(item.productName) // 僅傳遞產品名稱
+    } else if (item.type === 'farm') {
+        forceNavigateTo(null, item.farmId) // 農場搜尋傳遞 farmId
+    }
+    searchQuery.value = ''
+}
 </script>
 
 <style scoped>
-/* 標頭整體樣式 */
 .header {
     position: fixed;
     top: 0;
@@ -63,13 +147,10 @@ const router = useRouter()
     box-sizing: border-box;
 }
 
-/* 頂部導航欄樣式 */
 .topbar {
-    width: 100%;
-    background-color: #ffffff;
+    background-color: #dfffe1;
     border-bottom: 2px solid #66bb6a;
     padding: 20px 0;
-    box-sizing: border-box;
 }
 
 .topbar-content {
@@ -77,10 +158,9 @@ const router = useRouter()
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    justify-content: center; /* 改為居中，移除 space-between */
+    justify-content: center;
     align-items: center;
-    gap: 20px; /* 控制搜索框和標誌之間的間距 */
-    box-sizing: border-box;
+    gap: 20px;
 }
 
 .search-bar {
@@ -94,18 +174,13 @@ const router = useRouter()
 .logo-title-container {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 15px;
-    /* 移除 flex: 1，改用自然寬度 */
 }
 
-/* 標誌圖片 */
 .logo {
     height: 80px;
-    width: auto;
 }
 
-/* 標題 */
 .title {
     color: #5d4037;
     font-size: 32px;
@@ -113,13 +188,10 @@ const router = useRouter()
     text-align: center;
 }
 
-/* 主導航欄 */
 .navbar {
-    width: 100%;
     background-color: #dfffe1;
     padding: 10px 0;
     border-bottom: 3px solid #66bb6a;
-    box-sizing: border-box;
 }
 
 .nav-links {
@@ -129,10 +201,9 @@ const router = useRouter()
     display: flex;
     gap: 20px;
     align-items: center;
-    justify-content: center; /* 確保導航連結居中 */
+    justify-content: center;
 }
 
-/* 導航連結 */
 .navbar-link {
     font-size: 16px;
     text-decoration: none;
@@ -147,14 +218,9 @@ const router = useRouter()
     border-radius: 5px;
 }
 
-/* 下拉選單樣式 */
 .dropdown {
     position: relative;
     display: inline-block;
-}
-
-.dropdown-toggle {
-    cursor: pointer;
 }
 
 .dropdown-menu {
@@ -174,19 +240,44 @@ const router = useRouter()
     text-decoration: none;
     display: block;
     font-size: 14px;
-    font-weight: normal;
 }
 
 .dropdown-item:hover {
     background-color: #f0f0f0;
 }
 
-/* 當滑鼠懸停時顯示下拉選單 */
 .dropdown:hover .dropdown-menu {
     display: block;
 }
 
-/* 響應式設計 */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    padding: 5px 0;
+}
+
+.search-suggestions ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-suggestions li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.search-suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
 @media (max-width: 768px) {
     .topbar-content {
         flex-direction: column;

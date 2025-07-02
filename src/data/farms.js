@@ -81,18 +81,14 @@ const farms = [
     },
     {
         id: 7,
-        name: '新興果農讚',
+        name: '新興果農',
         contactPerson: '徐振鐘',
         phone: '0912499603',
         address: '屏東縣竹田鄉泗洲村洲中路52號',
         products: [
-            { products_name: '扁實檸檬', products_logo: '' },
-            { products_name: '紅龍果', products_logo: '' },
-            { products_name: '酪梨', products_logo: '' },
-            { products_name: '番石榴', products_logo: '' },
-            { products_name: '山刺番荔枝', products_logo: '' },
+            { products_name: '本土酪梨', products_logo: '' },
             { products_name: '紅毛丹', products_logo: '' },
-            { products_name: '山竹', products_logo: '' }
+            { products_name: '山竹', products_logo: '../farms/products/新興果農_山竹.jpg' }
         ],
         isOrganic: true,
         website: 'https://www.i-organic.org.tw/farm/HOAF1169/',

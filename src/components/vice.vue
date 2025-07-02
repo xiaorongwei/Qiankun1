@@ -29,7 +29,7 @@
             </div>
 
             <!-- 文章區域 -->
-            <div class="article-section">
+            <!-- <div class="article-section">
                 <details class="article-item" v-for="(item, index) in aboutData" :key="index">
                     <summary class="article-item-title">
                         <span class="icon">📜</span>
@@ -45,7 +45,7 @@
                         </p>
                     </div>
                 </details>
-            </div>
+            </div> -->
         </section>
 
         <!-- 頁面底部頁腳 -->

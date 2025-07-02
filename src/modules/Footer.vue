@@ -25,7 +25,7 @@
             </div>
 
             <!-- 時內地圖 -->
-            <div class="footer-column">
+            <!-- <div class="footer-column">
                 <h3>營業時間</h3>
                 <a href="#" class="farm-link">🌾 農場 1 - 查看資訊</a>
                 <br />
@@ -33,7 +33,7 @@
                 <br />
                 <a href="#" class="farm-link">🌾 農場 3 - 查看資訊</a>
                 <br />
-            </div>
+            </div> -->
 
             <!-- QR Code -->
             <div class="footer-column">
@@ -50,14 +50,6 @@
                     class="fb-link"
                 >
                     🌍 FB 粉絲專頁
-                </a>
-                <br />
-                <a
-                    href="https://www.facebook.com/ChienKunFarm/?locale=zh_TW"
-                    target="_blank"
-                    class="fb-link"
-                >
-                    📸 IG 粉絲專頁
                 </a>
             </div>
         </div>

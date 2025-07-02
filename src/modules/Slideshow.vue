@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import type { Ref } from 'vue' // 引入 Vue 的類型定義
+import type { Ref } from 'vue'
 
 // 引入幻燈片資料
 import { slideshow } from '../data/slideshow'
@@ -30,8 +30,6 @@ interface Slide {
 // 確保 slideshow 資料符合類型
 const slides: Ref<string[]> = ref(
     slideshow.map((slide: Slide) => {
-        // 如果圖片路徑是相對路徑，確保它們在 public 目錄下
-        // 例如：/slides/slide1.jpg
         return slide.img
     })
 )
@@ -81,20 +79,19 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 確保父元素有寬度，避免 slideshow 寬度為 0 */
+/* 移除父容器的寬度限制，確保填滿 */
 :deep(.page-wrapper) {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
 }
 
 /* 幻燈片容器樣式 */
 .slideshow {
-    width: 100%;
-    max-width: 1200px; /* 限制最大寬度 */
+    width: 100%; /* 填滿整個頁面寬度 */
     position: relative;
     overflow: hidden; /* 隱藏超出容器的內容 */
-    margin: 20px auto; /* 上下間距 20px，左右自動居中 */
+    margin: 0; /* 移除外邊距 */
     display: flex;
     justify-content: center; /* 水平居中內容 */
     min-height: 400px; /* 確保有最小高度 */
@@ -113,14 +110,13 @@ onUnmounted(() => {
     height: 500px; /* 固定高度 */
     flex-shrink: 0; /* 防止圖片縮小 */
     position: relative;
-    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); /* 漸層背景 */
 }
 
 /* 幻燈片圖片樣式 */
 .slide-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 圖片按比例填充 */
+    object-fit: cover; /* 圖片按比例填充整個區域 */
     position: absolute;
     top: 0;
     left: 0;
