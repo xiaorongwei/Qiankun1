@@ -1,3 +1,4 @@
+const baseUrl = import.meta.env.BASE_URL || '/'
 const farms = [
     {
         id: 1,
@@ -6,12 +7,12 @@ const farms = [
         phone: '0937692657',
         address: '屏東縣萬巒鄉新厝村6鄰新平路73號',
         products: [
-            { products_name: '荔枝', products_logo: '../farms/products/荔枝2.jpg' },
-            { products_name: '芭樂', products_logo: '../farms/products/芭樂.jpg' }
+            { products_name: '荔枝', products_logo: `${baseUrl}farms/products/litchi_2.jpg` },
+            { products_name: '芭樂', products_logo: `${baseUrl}farms/products/guava.jpg` }
         ],
         isOrganic: true,
         website: 'https://www.facebook.com/ChienKunFarm/',
-        logo: '../farms/乾坤.jpg'
+        logo: `${baseUrl}farms/Qiankun.jpg`
     },
     {
         id: 2,
@@ -19,10 +20,10 @@ const farms = [
         contactPerson: '翁錦珍',
         phone: '0956291265 & 08-7758050',
         address: '屏東縣里港鄉茄冬村茄冬路7號',
-        products: [{ products_name: '檸檬', products_logo: '../farms/products/檸檬.jpg' }],
+        products: [{ products_name: '檸檬', products_logo: `${baseUrl}farms/products/lemon.jpg` }],
         isOrganic: true,
         website: 'https://www.facebook.com/liganglemon/',
-        logo: '../farms/檸檬.jpg'
+        logo: `${baseUrl}farms/lemon.jpg`
     },
     {
         id: 3,
@@ -31,12 +32,12 @@ const farms = [
         phone: '0925769192',
         address: '屏東縣瑪家鄉三和村美園31號',
         products: [
-            { products_name: '木瓜', products_logo: '../farms/products/木瓜.jpg' },
-            { products_name: '蕃茄', products_logo: '../farms/products/番茄.jpg' }
+            { products_name: '木瓜', products_logo: `${baseUrl}farms/products/papaya.jpg` },
+            { products_name: '蕃茄', products_logo: `${baseUrl}farms/products/tomato.jpg` }
         ],
         isOrganic: true,
         website: 'https://www.facebook.com/as443/',
-        logo: '../farms/永勝有機園.jpg'
+        logo: `${baseUrl}farms/YongshengOrganicGarden.jpg`
     },
     {
         id: 4,
@@ -47,7 +48,7 @@ const farms = [
         products: [{ products_name: '火龍果', products_logo: '' }],
         isOrganic: true,
         website: 'https://www.facebook.com/sutsaifarm',
-        logo: '../farms/蘇蔡農場.jpg'
+        logo: `${baseUrl}farms/sucai_farm.jpg`
     },
     {
         id: 5,
@@ -58,12 +59,12 @@ const farms = [
         products: [
             {
                 products_name: '金銀花及金銀花相關產品',
-                products_logo: '../farms/products/金針花.jpg'
+                products_logo: `${baseUrl}farms/products/daylily.jpg`
             }
         ],
         isOrganic: true,
         website: 'https://www.facebook.com/552gphxb',
-        logo: '../farms/金銀花.jpg'
+        logo: `${baseUrl}farms/jinyinhua.jpg`
     },
     {
         id: 6,
@@ -72,12 +73,12 @@ const farms = [
         phone: '0932883448',
         address: '屏東市廣興里廣興126-5號',
         products: [
-            { products_name: '檸檬', products_logo: '../farms/products/巴轆_檸檬.jpg' },
+            { products_name: '檸檬', products_logo: `${baseUrl}farms/products/balu_lemon.jpg` },
             { products_name: '金桔', products_logo: '' }
         ],
         isOrganic: true,
         website: 'https://www.facebook.com/baruorganicfarm/',
-        logo: '../farms/巴轆.jpg'
+        logo: `${baseUrl}farms/barao.jpg`
     },
     {
         id: 7,
@@ -88,7 +89,10 @@ const farms = [
         products: [
             { products_name: '本土酪梨', products_logo: '' },
             { products_name: '紅毛丹', products_logo: '' },
-            { products_name: '山竹', products_logo: '../farms/products/新興果農_山竹.jpg' }
+            {
+                products_name: '山竹',
+                products_logo: `${baseUrl}farms/products/xinxing_mangosteen.jpg`
+            }
         ],
         isOrganic: true,
         website: 'https://www.i-organic.org.tw/farm/HOAF1169/',
@@ -106,7 +110,7 @@ const farms = [
         ],
         isOrganic: true,
         website: 'https://www.facebook.com/people/成德寬居有機農場/100079519153768/',
-        logo: '../farms/成德寬居有機農場.jpg'
+        logo: `${baseUrl}farms/chengde.jpg`
     },
     {
         id: 9,
@@ -126,8 +130,11 @@ const farms = [
         phone: '0989155503',
         address: '屏東縣新埤鄉打鐵村東興路108號',
         products: [
-            { products_name: '香蕉', products_logo: '../farms/products/林家_香蕉.jpg' },
-            { products_name: '黃金果', products_logo: '../farms/products/林家_黃金果.jpg' },
+            { products_name: '香蕉', products_logo: `${baseUrl}farms/products/lin_banana.jpg` },
+            {
+                products_name: '黃金果',
+                products_logo: `${baseUrl}farms/products/lin_goldenfruit.jpg`
+            },
             { products_name: '龍眼', products_logo: '' },
             { products_name: '芭樂', products_logo: '' },
             { products_name: '芒果', products_logo: '' },
@@ -145,10 +152,10 @@ const farms = [
         contactPerson: '蔡瑞棠',
         phone: '0935669533',
         address: '屏東縣內埔鄉水門村忠孝路270號',
-        products: [{ products_name: '芒果', products_logo: '../farms/products/芒果.jpg' }],
+        products: [{ products_name: '芒果', products_logo: `${baseUrl}farms/products/mango.jpg` }],
         isOrganic: true,
         website: 'http://ushop30005.ec99.tw/',
-        logo: '../farms/武山老棠.jpg'
+        logo: `${baseUrl}farms/wushan.jpg`
     },
     {
         id: 12,
@@ -177,7 +184,7 @@ const farms = [
         ],
         isOrganic: true,
         website: 'https://www.facebook.com/QuFangFarm/?locale=zh_TW',
-        logo: '../farms/趣訪有機農園-可可咖啡.jpg'
+        logo: `${baseUrl}farms/qufang_cocoa.jpg`
     },
     {
         id: 14,
@@ -185,7 +192,12 @@ const farms = [
         contactPerson: '吳文忠',
         phone: '',
         address: '',
-        products: [{ products_name: '黃金果', products_logo: '../farms/products/14_黃金果.jpg' }],
+        products: [
+            {
+                products_name: '黃金果',
+                products_logo: `${baseUrl}farms/products/goldenfruit_14.jpg`
+            }
+        ],
         isOrganic: true,
         website: 'https://www.facebook.com/people/小哥的果香屋/100064059218623/',
         logo: ''

@@ -11,55 +11,55 @@ import Redirect from '../components/Redirect.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/dist/',
         name: 'home',
         component: Home,
         meta: { title: '首頁' }
     },
     {
-        path: '/vice',
+        path: '/dist/vice',
         name: 'vice',
         component: vice,
         meta: { title: '關於我們' }
     },
     {
-        path: '/activity-highlights',
+        path: '/dist/activity-highlights',
         name: 'activityHighlights',
         component: ActivityHighlights,
         meta: { title: '活動花絮' }
     },
     {
-        path: '/highlights',
+        path: '/dist/highlights',
         name: 'highlights',
         component: Highlights,
         meta: { title: '最新活動' }
     },
     {
-        path: '/cooperate',
+        path: '/dist/cooperate',
         name: 'cooperate',
         component: cooperate,
         meta: { title: '合作夥伴' }
     },
     {
-        path: '/commodity',
+        path: '/dist/commodity',
         name: 'commodity',
         component: Commodity,
         meta: { title: '商品列表' }
     },
     {
-        path: '/certificate',
+        path: '/dist/certificate',
         name: 'certificate',
         component: Certificate,
         meta: { title: '有機證書' }
     },
     {
-        path: '/:pathMatch(.*)*',
+        path: '/dist/:pathMatch(.*)*',
         name: 'notFound',
         component: NotFound,
         meta: { title: '404 - 頁面未找到' }
     },
     {
-        path: '/redirect',
+        path: '/dist/redirect',
         name: 'Redirect',
         component: Redirect,
         meta: { title: '跳轉中...' }

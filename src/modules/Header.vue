@@ -40,15 +40,17 @@
 
         <nav class="navbar">
             <div class="nav-links">
-                <router-link to="/" class="navbar-link">🏡首頁</router-link>
-                <router-link to="/cooperate" class="navbar-link">📚會員名冊</router-link>
-                <router-link to="/commodity" class="navbar-link">🛒商品頁</router-link>
+                <router-link to="/dist/" class="navbar-link">🏡首頁</router-link>
+                <router-link to="/dist/cooperate" class="navbar-link">📚會員名冊</router-link>
+                <router-link to="/dist/commodity" class="navbar-link">🛒商品頁</router-link>
 
                 <div class="dropdown">
                     <span class="navbar-link">🌱關於我們</span>
                     <div class="dropdown-menu">
-                        <router-link to="/vice" class="dropdown-item">🍍小農的故事</router-link>
-                        <router-link to="/certificate" class="dropdown-item">
+                        <router-link to="/dist/vice" class="dropdown-item">
+                            🍍小農的故事
+                        </router-link>
+                        <router-link to="/dist/certificate" class="dropdown-item">
                             📜有機證書
                         </router-link>
                     </div>
@@ -96,17 +98,17 @@ const filteredResults = computed(() => {
 
     return [...fromProducts, ...fromFarms]
 })
+
 // 跳轉頁面
 const forceNavigateTo = (productName = null, farmId = null) => {
     const newQuery = {
         ...(productName ? { product: productName } : {}),
         ...(farmId ? { farmId } : {})
     }
-
-    if (router.currentRoute.value.path === '/commodity') {
-        router.push({ path: '/redirect', query: newQuery })
+    if (router.currentRoute.value.path === '/dist/commodity') {
+        router.push({ path: '/dist/redirect', query: newQuery })
     } else {
-        router.push({ path: '/commodity', query: newQuery })
+        router.push({ path: '/dist/commodity', query: newQuery })
     }
 }
 
@@ -116,12 +118,12 @@ const navigateToResult = () => {
     const result = filteredResults.value[0]
     if (result) {
         if (result.type === 'product') {
-            forceNavigateTo(result.productName) // 僅傳遞產品名稱
+            forceNavigateTo(result.productName)
         } else if (result.type === 'farm') {
-            forceNavigateTo(null, result.farmId) // 農場搜尋傳遞 farmId
+            forceNavigateTo(null, result.farmId)
         }
     } else {
-        forceNavigateTo(searchQuery.value) // 無建議時傳遞搜尋關鍵字
+        forceNavigateTo(searchQuery.value) // 無建議時傳遞關鍵字
     }
     searchQuery.value = ''
 }
@@ -129,9 +131,9 @@ const navigateToResult = () => {
 // 點選搜尋建議
 const navigateToResultItem = (item) => {
     if (item.type === 'product') {
-        forceNavigateTo(item.productName) // 僅傳遞產品名稱
+        forceNavigateTo(item.productName)
     } else if (item.type === 'farm') {
-        forceNavigateTo(null, item.farmId) // 農場搜尋傳遞 farmId
+        forceNavigateTo(null, item.farmId)
     }
     searchQuery.value = ''
 }

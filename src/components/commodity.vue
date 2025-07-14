@@ -181,7 +181,7 @@ const closeModal = () => {
 
 // 圖片錯誤處理
 const handleImageError = (event) => {
-    event.target.src = '../farms/products/敬請期待.jpg'
+    event.target.src = '../dist/farms/products/Stay_tuned.jpg'
 }
 </script>
 

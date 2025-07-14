@@ -13,7 +13,7 @@ const route = useRoute()
 onMounted(() => {
     const { product, farmId } = route.query
     router.replace({
-        path: '/commodity',
+        path: '/dist/commodity',
         query: {
             product,
             ...(farmId ? { farmId } : {})
