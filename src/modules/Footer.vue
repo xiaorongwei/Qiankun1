@@ -38,7 +38,8 @@
             <!-- QR Code -->
             <div class="footer-column">
                 <h3>QR CODE</h3>
-                <img src="" alt="QR Code" class="qrcode" />
+                <!-- <img src="../public/farms/QRcode.jpg" alt="QRCode" class="qrcode" /> -->
+                <!-- C:\Users\user\OneDrive\Desktop\Qiankun\public\farms\QRcode.jpg -->
             </div>
 
             <!-- FB 粉絲專頁 -->
