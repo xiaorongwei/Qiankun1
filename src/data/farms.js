@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.BASE_URL || '/'
+const baseUrl = import.meta.env.BASE_URL || '/dist'
 const farms = [
     {
         id: 1,

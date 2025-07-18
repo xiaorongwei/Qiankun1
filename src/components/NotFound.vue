@@ -3,7 +3,7 @@
     <div class="not-found">
         <h1>404 - 頁面未找到</h1>
         <p>抱歉，您訪問的頁面不存在。</p>
-        <router-link to="/">返回首頁</router-link>
+        <router-link to="/dist">返回首頁</router-link>
     </div>
 </template>
 

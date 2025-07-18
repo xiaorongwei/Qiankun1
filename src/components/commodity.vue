@@ -43,7 +43,7 @@
 
                 <p v-else style="color: red; font-weight: bold">
                     查無符合關鍵字「{{ keyword }}」或農場的商品。
-                    <router-link to="/commodity">查看所有商品</router-link>
+                    <router-link to="/dist/commodity">查看所有商品</router-link>
                 </p>
             </section>
         </main>
