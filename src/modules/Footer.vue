@@ -57,7 +57,7 @@
             <!-- QR Code -->
             <div class="footer-column">
                 <h3>QR CODE</h3>
-                <img src="../public/farms/QRcode.jpg" alt="掃描QR碼以了解更多" class="qrcode" />
+                <img src="/farms/QRcode.jpg" alt="掃描QR碼以了解更多" class="qrcode" />
             </div>
 
             <!-- FB 粉絲專頁 -->
