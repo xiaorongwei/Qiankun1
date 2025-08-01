@@ -40,7 +40,7 @@
                 <p class="article-description">這裡是文章描述的簡介</p> -->
 
             <!-- 可下拉文章區塊 -->
-            <!--<div class="article-list">
+            <!-- <div class="article-list">
                     <details class="article-item">
                         <summary class="article-item-title">
                             <span class="icon">🚌</span>
@@ -57,7 +57,7 @@
                     </details>-->
 
             <!-- 附近交通資訊 -->
-            <!--<details class="article-item">
+            <!-- <details class="article-item">
                         <summary class="article-item-title">
                             <span class="icon">🚗</span>
                             附近交通資訊
@@ -99,7 +99,7 @@ const router = useRouter()
 .main-content {
     flex: 1;
     background-color: #e5ffc7;
-    padding: 40px 20px;
+    padding: clamp(1rem, 2.5vw, 2.5rem) clamp(1rem, 2vw, 1.25rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,9 +108,9 @@ const router = useRouter()
 /* 文章區域 */
 .article-section {
     width: 100%;
-    max-width: 1000px;
-    margin: 30px 0;
-    padding: 20px;
+    max-width: 1200px; /* 與商品頁和會員名冊頁一致 */
+    margin: clamp(1.5rem, 3vw, 3rem) 0;
+    padding: clamp(1rem, 2vw, 1.25rem);
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -118,36 +118,36 @@ const router = useRouter()
 
 /* 文章標題 */
 .article-title {
-    font-size: 28px;
+    font-size: clamp(1.5rem, 2.5vw, 1.75rem);
     font-weight: 700;
     color: #4a3c31;
-    margin-bottom: 15px;
+    margin-bottom: clamp(0.75rem, 1.5vw, 0.9375rem);
     text-align: center;
 }
 
 /* 文章標題下的分隔線 */
 .article-divider {
-    width: 60px;
+    width: clamp(2.5rem, 5vw, 3.75rem);
     height: 4px;
     background-color: #ff6b6b;
-    margin: 0 auto 25px;
+    margin: 0 auto clamp(1rem, 2vw, 1.5625rem);
     border-radius: 2px;
 }
 
 /* 文章描述 */
 .article-description {
-    font-size: 16px;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
     color: #5d4037;
     line-height: 1.8;
     text-align: justify;
-    margin-bottom: 30px;
+    margin-bottom: clamp(1.5rem, 3vw, 1.875rem);
 }
 
 /* 文章列表 */
 .article-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: clamp(0.75rem, 1.5vw, 0.9375rem);
 }
 
 /* 單個文章區塊 */
@@ -162,13 +162,13 @@ const router = useRouter()
 
 /* 文章區塊標題 */
 .article-item-title {
-    font-size: 18px;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
     font-weight: 600;
     color: #4a3c31;
-    padding: 15px 20px;
+    padding: clamp(0.75rem, 1.5vw, 0.9375rem) clamp(1rem, 2vw, 1.25rem);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(0.5rem, 1vw, 0.625rem);
     background-color: #f5f5f5;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -180,13 +180,13 @@ const router = useRouter()
 
 /* 圖標樣式 */
 .icon {
-    font-size: 20px;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
 }
 
 /* 文章內容 */
 .article-content {
-    padding: 20px;
-    font-size: 14px;
+    padding: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(0.75rem, 1.2vw, 0.875rem);
     color: #5d4037;
     line-height: 1.8;
     background-color: #fafafa;
@@ -199,7 +199,7 @@ const router = useRouter()
 
 .article-item summary::after {
     content: '▼';
-    font-size: 12px;
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     margin-left: auto;
     transition: transform 0.3s ease;
 }
@@ -211,6 +211,41 @@ const router = useRouter()
 
 /* Slideshow 調整 */
 :deep(.slideshow) {
-    margin-top: 180px;
+    margin-top: clamp(7.5rem, 10vw, 11.25rem);
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+    .article-section {
+        max-width: 900px; /* 稍微縮減寬度 */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    .article-section {
+        margin: 1.5rem 0;
+        padding: 1rem;
+    }
+    .article-description {
+        text-align: left; /* 小螢幕上調整為左對齊 */
+    }
+}
+
+@media (max-width: 480px) {
+    .article-title {
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    }
+    .article-description {
+        font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    }
+    .article-divider {
+        width: clamp(2rem, 4vw, 2.5rem);
+    }
+    :deep(.slideshow) {
+        margin-top: 5rem;
+    }
 }
 </style>

@@ -123,4 +123,31 @@ onUnmounted(stopSlideShow)
 .next {
     right: 10px;
 }
+@media (max-width: 1024px) {
+    .slide {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide {
+        height: 300px;
+    }
+
+    .slide-btn {
+        padding: 8px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide {
+        height: 200px;
+    }
+
+    .slide-btn {
+        padding: 6px;
+        font-size: 16px;
+    }
+}
 </style>

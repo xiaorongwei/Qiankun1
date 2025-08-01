@@ -97,6 +97,7 @@ const getFarmLogo = (farm) => {
 </script>
 
 <style scoped>
+@import '../assets/css/main.css';
 .page-wrapper {
     display: flex;
     flex-direction: column;
@@ -115,7 +116,7 @@ const getFarmLogo = (farm) => {
 .farm-section {
     width: 100%;
     max-width: 1200px;
-    margin: 180px 0 20px;
+    margin: 180px 0 20px; /* 與商品頁一致，考慮固定 Header */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,16 +125,17 @@ const getFarmLogo = (farm) => {
 
 .farm-section h2 {
     color: #5d4037;
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    margin-bottom: 1.25rem;
     border-bottom: 2px solid #a5d6a7;
-    padding-bottom: 10px;
+    padding-bottom: 0.625rem;
+    font-family: 'Georgia', 'Noto Serif TC', serif;
     width: fit-content;
 }
 
 .farm-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 與商品頁一致，實現並排 */
     gap: 20px;
     justify-items: center;
 }
@@ -143,7 +145,8 @@ const getFarmLogo = (farm) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
+    width: 100%;
+    max-width: 350px; /* 與商品頁的 fruit-item 一致 */
     background-color: #e8f5e9;
     border-radius: 10px;
     padding: 15px;
@@ -151,8 +154,44 @@ const getFarmLogo = (farm) => {
     transition: all 0.3s ease;
 }
 
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #e5ffc7;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.farm-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 150px auto 1rem; /* 與商品頁一致，考慮固定 Header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.farm-section h2 {
+    color: #5d4037;
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid #a5d6a7;
+    padding-bottom: 0.625rem;
+    font-family: 'Georgia', 'Noto Serif TC', serif;
+    width: fit-content;
+}
+
 .farm-item:hover {
     transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .farm-content {
@@ -163,33 +202,36 @@ const getFarmLogo = (farm) => {
 }
 
 .farm-logo-container {
-    flex: 0 0 auto;
+    flex: 0 0 33.33%; /* 與商品頁一致 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .farm-logo {
-    width: 120px;
-    height: 120px;
+    width: clamp(80px, 25vw, 100px); /* 與商品頁一致 */
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .farm-info {
-    flex: 1;
+    flex: 0 0 66.67%; /* 與商品頁一致 */
     text-align: left;
 }
 
 .farm-name {
-    font-size: 18px;
+    font-size: clamp(1rem, 2vw, 1.125rem); /* 與商品頁一致 */
     color: #5d4037;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .farm-detail {
-    font-size: 14px;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem); /* 與商品頁一致 */
     color: #5d4037;
-    margin: 5px 0;
+    margin: 0.3125rem 0;
 }
 
 .label {
@@ -198,8 +240,49 @@ const getFarmLogo = (farm) => {
 }
 
 .no-data {
-    font-size: 16px;
+    font-size: clamp(0.875rem, 2vw, 1rem); /* 與商品頁的 no-results 一致 */
     color: #5d4037;
-    margin-top: 20px;
+    margin-top: 1.25rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+    .farm-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 切換為自適應 */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    .farm-section {
+        margin: 120px auto 1rem; /* 與商品頁一致 */
+    }
+    .farm-content {
+        flex-direction: column; /* 與商品頁一致，切換為單列 */
+        align-items: flex-start;
+    }
+    .farm-logo-container,
+    .farm-info {
+        flex: 0 0 100%; /* 與商品頁一致 */
+        text-align: center;
+    }
+    .farm-logo {
+        width: clamp(60px, 20vw, 80px); /* 與商品頁一致 */
+    }
+}
+
+@media (max-width: 480px) {
+    .farm-section h2 {
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* 與商品頁一致 */
+    }
+    .farm-name {
+        font-size: 0.875rem; /* 與商品頁一致 */
+    }
+    .farm-detail,
+    .no-data {
+        font-size: 0.75rem; /* 與商品頁一致 */
+    }
 }
 </style>

@@ -202,4 +202,51 @@ const aboutDataRef = ref(aboutData)
 .article-item[open] summary::after {
     content: '▲';
 }
+/* 響應式設計 */
+@media (max-width: 1024px) {
+    .home {
+        padding-top: clamp(90px, 12vw, 120px);
+    }
+    .content-row {
+        gap: clamp(8px, 1.5vw, 15px);
+    }
+    .about-image {
+        width: clamp(120px, 15vw, 150px);
+        height: clamp(150px, 18.75vw, 187.5px);
+    }
+}
+
+@media (max-width: 768px) {
+    .home {
+        padding-top: clamp(80px, 10vw, 100px);
+    }
+    .content-row {
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(10px, 2vw, 15px);
+    }
+    .about-image {
+        width: 100%;
+        height: auto;
+        max-width: clamp(100px, 15vw, 150px);
+    }
+    .about-description {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .home {
+        padding-top: clamp(60px, 8vw, 80px);
+    }
+    .content-title {
+        font-size: clamp(16px, 2vw, 18px);
+    }
+    .paragraph {
+        font-size: clamp(12px, 1.5vw, 14px);
+    }
+    .about-content {
+        padding: clamp(8px, 1.5vw, 15px);
+    }
+}
 </style>

@@ -362,4 +362,51 @@ const handleImageError = (event) => {
 .modal-close-btn:hover {
     background-color: #388e3c;
 }
+/* 響應式設計 */
+@media (max-width: 1024px) {
+    .fruit-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    .fruit-section {
+        margin: 120px auto 1rem; /* 調整頂部間距以適配較小的 Header */
+    }
+    .fruit-item {
+        max-width: 100%;
+    }
+    .fruit-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .fruit-logo-container,
+    .fruit-info {
+        flex: 0 0 100%;
+        text-align: center;
+    }
+    .fruit-logo {
+        width: clamp(60px, 20vw, 80px);
+    }
+}
+
+@media (max-width: 480px) {
+    .fruit-section h2 {
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    }
+    .fruit-name {
+        font-size: 0.875rem;
+    }
+    .fruit-detail,
+    .modal-detail,
+    .no-results {
+        font-size: 0.75rem;
+    }
+    .modal-content {
+        padding: 1rem;
+    }
+}
 </style>

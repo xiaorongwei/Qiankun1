@@ -280,28 +280,53 @@ const navigateToResultItem = (item) => {
     background-color: #f0f0f0;
 }
 
+/* 響應式設計 */
+@media (max-width: 1024px) {
+    .topbar-content {
+        gap: 1rem;
+    }
+    .search-bar {
+        max-width: 300px;
+    }
+}
+
 @media (max-width: 768px) {
     .topbar-content {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.75rem;
     }
-
     .search-bar {
-        width: 100%;
-        max-width: 300px;
+        max-width: 100%;
     }
-
-    .logo {
-        height: 60px;
-    }
-
-    .title {
-        font-size: 24px;
-    }
-
     .nav-links {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.75rem;
+    }
+    .dropdown-menu {
+        position: static;
+        min-width: 100%;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        height: clamp(40px, 8vw, 50px);
+    }
+    .title {
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    }
+    .search-bar {
+        font-size: 0.75rem;
+    }
+    .navbar-link,
+    .dropdown-item {
+        font-size: 0.75rem;
+    }
+    .search-suggestions {
+        max-width: 90%;
     }
 }
 </style>
